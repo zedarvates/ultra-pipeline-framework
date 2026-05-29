@@ -1,0 +1,85 @@
+name: Tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.10", "3.11", "3.12", "3.13"]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Run DAG Context tests
+        run: |
+          python3 -c "
+          from dag_context import *
+          s = new_session('test')
+          assert s['id']
+          n = add_node('plan', 'test plan')
+          assert n['type'] == 'plan'
+          nodes = compress_dag(level=2)
+          assert isinstance(nodes, list)
+          stats = get_stats()
+          assert stats['total_nodes'] >= 1
+          print('DAG Context: OK')
+          "
+
+      - name: Run Pipeline tests
+        run: |
+          python3 -c "
+          from self_eval_pipeline import *
+          import json, os
+          p = new_pipeline('test-pipe', ['speed', 'cost'])
+          save_pipeline(p)
+          h = add_hypothesis('test-pipe', 'test hyp', 'var', '+10%')
+          assert h['id']
+          r = new_run('test-pipe', h['id'])
+          assert r['id']
+          print('Pipeline: OK')
+          os.remove('ultra/pipelines/test-pipe.json')
+          "
+
+      - name: Run Skill Bundler tests
+        run: |
+          python3 -c "
+          from skill_bundler import *
+          m = create_bundle('test-bundle', 'test')
+          assert m['name'] == 'test-bundle'
+          v = validate_bundle('test-bundle')
+          print(f'Validation: {\"PASS\" if v else \"FAIL\"}')
+          record_skill_run('test-bundle', score=90, duration=10, tokens=500)
+          score = get_bundle_score('test-bundle')
+          assert score['score']['total_runs'] == 1
+          print('Skill Bundler: OK')
+          import shutil
+          shutil.rmtree('ultra/skill_bundles/test-bundle')
+          "
+
+      - name: Run Ultra Pipeline tests
+        run: |
+          python3 -c "
+          from ultra_pipeline import UltraPipeline
+          pipe = UltraPipeline('test-ultra')
+          pipe.define_pipeline(['speed', 'cost'])
+          assert pipe.state == 'defined'
+          print('Ultra: OK')
+          import shutil
+          shutil.rmtree('ultra/runs/test-ultra', ignore_errors=True)
+          os.remove('ultra/runs/test-ultra_state.json')
+          os.remove('ultra/pipelines/test-ultra.json')
+          "
+
+      - name: Run full example
+        run: python3 example_checkup.py

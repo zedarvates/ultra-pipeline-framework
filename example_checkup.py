@@ -102,10 +102,15 @@ def stage_3_skill_bundler():
     print("STAGE 3: Skill Bundler 2.0")
     print("=" * 60)
     
-    # Create bundle
-    meta = create_bundle("cluster-checkup", 
-                        "Automatic cluster health diagnostic")
-    print(f"Bundle created: {meta['name']}")
+    # Create bundle (skip if exists from prior run)
+    from pathlib import Path
+    if Path(f"ultra/skill_bundles/cluster-checkup").exists():
+        meta = {"name": "cluster-checkup"}  # reuse existing
+        print(f"Bundle already exists: {meta['name']}")
+    else:
+        meta = create_bundle("cluster-checkup", 
+                            "Automatic cluster health diagnostic")
+        print(f"Bundle created: {meta['name']}")
     
     # Validate
     success = validate_bundle("cluster-checkup")
