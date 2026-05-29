@@ -1,0 +1,19 @@
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+dist/
+build/
+.venv/
+venv/
+
+# Data stores (generated at runtime)
+dag_store/
+pipelines/
+skill_bundles/
+skill_memory/
+runs/
+
+# OS
+.DS_Store
+Thumbs.db
