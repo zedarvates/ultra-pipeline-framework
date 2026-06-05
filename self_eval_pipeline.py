@@ -50,8 +50,8 @@ import json, os, sys, hashlib, time, shutil
 from datetime import datetime
 from pathlib import Path
 
-HOME = Path.home()
-STORE = HOME / ".hermes" / "ultra" / "pipelines"
+HOME = Path(os.environ.get("ULTRA_HOME", Path.home() / ".hermes" / "ultra"))
+STORE = HOME / "pipelines"
 
 # ── Data Models ──────────────────────────────────────────
 

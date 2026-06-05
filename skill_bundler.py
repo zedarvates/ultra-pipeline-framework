@@ -60,10 +60,10 @@ import json, os, sys, hashlib, subprocess, time, re
 from datetime import datetime
 from pathlib import Path
 
-HOME = Path.home()
-SKILLS_DIR = HOME / ".hermes" / "skills"
-BUNDLES_DIR = HOME / ".hermes" / "ultra" / "skill_bundles"
-MEMORY_DIR = HOME / ".hermes" / "ultra" / "skill_memory"
+ULTRA_HOME = Path(os.environ.get("ULTRA_HOME", Path.cwd() / "ultra"))
+SKILLS_DIR = Path.home() / ".hermes" / "skills"
+BUNDLES_DIR = ULTRA_HOME / "skill_bundles"
+MEMORY_DIR = ULTRA_HOME / "skill_memory"
 
 # ── Templates ────────────────────────────────────────────
 

@@ -23,8 +23,8 @@ import json, os, sys, hashlib, time
 from datetime import datetime
 from pathlib import Path
 
-HOME = Path.home()
-STORE = HOME / ".hermes" / "ultra" / "dag_store"
+HOME = Path(os.environ.get("ULTRA_HOME", Path.cwd() / "ultra"))
+STORE = HOME / "dag_store"
 SESSIONS = STORE / "sessions"
 NODES = STORE / "nodes"
 INDEX = STORE / "index.json"

@@ -1,4 +1,8 @@
-# Ultra Pipeline Framework v1
+# Ultra Pipeline Framework v1 🚀
+
+[![Python](https://img.shields.io/badge/python-3.11+-blue.svg)]()
+[![License](https://img.shields.io/badge/license-MIT-green.svg)]()
+[![Status](https://img.shields.io/badge/status-active-brightgreen.svg)()
 
 > Production-grade AI agent orchestration toolkit — DAG-based context, self-evaluating pipelines, skill bundles with memory, and a unified orchestrator for long-running workflows.
 
@@ -239,10 +243,18 @@ MIT — Do whatever you want. Build something beautiful.
 
 ## By
 
-Built by [OWL / Hermes Agent](https://github.com/zedarvates) for the [NexRealm](https://github.com/zedarvates) ecosystem.
+Built by [Hermes Agent / zedarvates](https://github.com/zedarvates) for the [NexRealm](https://github.com/zedarvates) ecosystem.
 96% of the design insights come from open research — we're just connecting the dots and shipping code.
 
 ---
+
+## Related Projects
+
+- [hermes-brain](https://github.com/zedarvates/hermes-brain) — Architecture cognitive Hermes
+- [cogniarc](https://github.com/zedarvates/cogniarc) — ARC-AGI-3 solver
+- [hermes-feedback](https://github.com/zedarvates/hermes-feedback) — Feedback system
+- [kitten-tts](https://github.com/zedarvates/kitten-tts) — TTS local FR
+- [FoveaCore](https://github.com/zedarvates/FoveaCore) — VR rendering engine
 
 *"The skill encodes task structure and workflow — not model-specific behavior."*
 — MUSE-AutoSkill transfer experiment conclusion
