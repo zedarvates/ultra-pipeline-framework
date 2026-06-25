@@ -258,3 +258,8 @@ Built by [Hermes Agent / zedarvates](https://github.com/zedarvates) for the [Nex
 
 *"The skill encodes task structure and workflow — not model-specific behavior."*
 — MUSE-AutoSkill transfer experiment conclusion
+
+
+---
+
+[![Donate](https://img.shields.io/badge/☕%20Soutenir-BTC%20%7C%20ETH-orange)](DONATE.md)
